@@ -1,0 +1,78 @@
+.container {
+    height: 95vh;
+    display: grid;
+    grid-template-columns: 1fr 4fr 1fr;
+    grid-template-rows: 1fr 0.5fr 8fr 0.5fr;
+    grid-gap: 0.1em;
+}
+
+.header {
+    background-color: rgb(219, 212, 194);
+    grid-column: 1/7;
+    display: grid;
+    grid-template-columns: 1fr 4fr 1fr;
+    grid-gap: 0.1em;
+}
+
+.logo {
+    grid-column: 1/2;
+    text-align: center;
+}
+
+.title {
+    grid-column: 2/3;
+    color: goldenrod;
+    text-align: center;
+}
+
+.empty-corner {
+    grid-column: 3/4;
+    text-align: center;
+
+}
+
+.menu-bar {
+    background-color: rgb(207, 194, 163);
+    grid-column: 1/7;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-gap: 0.1em;
+}
+
+.songs {
+    background-color: rgb(230, 214, 179);
+    grid-column: 2/3;
+    text-align: center;
+    padding: 0.4em;
+}
+
+.press {
+    background-color: rgb(230, 214, 179);
+    grid-column: 3/4;
+    text-align: center;
+    padding: 0.4em;
+}
+
+.local-partners {
+    background-color: rgb(230, 214, 179);
+    grid-column: 4/5;
+    text-align: center;
+    padding: 0.4em;
+}
+
+.about-us {
+    background-color: rgb(230, 214, 179);
+    grid-column: 5/6;
+    text-align: center;
+    padding: 0.4em;
+}
+
+.content-body {
+    background-color: rgb(219, 212, 194);
+    grid-column: 1/7;
+}
+
+.footer {
+    background-color: rgb(207, 194, 163);
+    grid-column: 1/7;
+}
