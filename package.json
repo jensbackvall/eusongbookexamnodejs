@@ -1,0 +1,23 @@
+{
+  "name": "eusongbookexamnodejs",
+  "version": "1.0.0",
+  "description": "EU song book project for node.js exam 2018",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jensbackvall/eusongbookexamnodejs.git"
+  },
+  "author": "Jens Bäckvall & Michael From Teuber",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jensbackvall/eusongbookexamnodejs/issues"
+  },
+  "homepage": "https://github.com/jensbackvall/eusongbookexamnodejs#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4"
+  }
+}
