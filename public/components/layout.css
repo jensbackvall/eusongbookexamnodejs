@@ -96,6 +96,14 @@
     display: block;
 }
 
+.dropdown-menu-center {
+    width: 100% !important;
+    left: 50% !important;
+    right: auto !important;
+    text-align: center !important;
+    transform: translate(-50%, 0) !important;
+}
+
 .dropdown-content a:hover {
     background-color: rgb(207, 194, 163);
 }
@@ -105,8 +113,7 @@
 }
 
 .dropdown:hover .dropbtn {
-    color: goldenrod;
-    background-color: rgb(230, 208, 163);
+    color: #daa520;
 }
 
 .content-body {
