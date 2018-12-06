@@ -9,6 +9,5 @@ var head = document.getElementsByTagName('head')[0];
 head.appendChild(script);
 
 function handler(){
-    //based on chat theme load various 
     $("#content").load("../public/components/layout.html");
 }
