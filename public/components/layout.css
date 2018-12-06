@@ -118,3 +118,8 @@
     background-color: rgb(207, 194, 163);
     grid-column: 1/7;
 }
+
+a {
+    text-decoration: none;
+    color: inherit;   
+}
