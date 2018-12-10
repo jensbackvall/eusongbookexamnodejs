@@ -3,11 +3,10 @@
     display: grid;
     grid-template-columns: 1fr 4fr 1fr;
     grid-template-rows: 1fr 0.5fr;
-    grid-gap: 0.1em;
 }
 
 .header {
-    background-color: rgb(219, 212, 194);
+    background-color: rgb(100, 155, 195);
     grid-column: 1/7;
     display: grid;
     grid-template-columns: 1fr 4fr 1fr;
@@ -15,24 +14,25 @@
 }
 
 .logo {
+    background-color: rgb(219, 212, 194);
     grid-column: 1/2;
     text-align: center;
 }
 
 .title {
     grid-column: 2/3;
-    color: goldenrod;
+    color: rgb(230, 210, 95);
     text-align: center;
 }
 
 .empty-corner {
+    background-color: rgb(219, 212, 194);
     grid-column: 3/4;
     text-align: center;
-
 }
 
 .menu-bar {
-    background-color: rgb(207, 194, 163);
+    background-color: rgb(219, 212, 194);
     grid-column: 1/7;
     display: grid;
     grid-template-columns: repeat(6, 1fr);
