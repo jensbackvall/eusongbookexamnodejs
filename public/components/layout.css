@@ -1,8 +1,8 @@
 .container {
-    height: 95vh;
+    min-height: 130px;
     display: grid;
     grid-template-columns: 1fr 4fr 1fr;
-    grid-template-rows: 1fr 0.5fr 8fr 0.5fr;
+    grid-template-rows: 1fr 0.5fr;
     grid-gap: 0.1em;
 }
 
@@ -90,6 +90,7 @@
 }
 
 .dropdown-content a {
+    background-color: rgb(230, 214, 179);
     color: black;
     padding: 12px 16px;
     text-decoration: none;
@@ -116,9 +117,19 @@
     color: #daa520;
 }
 
+.left-margin {
+    background-color: rgb(219, 212, 194);
+    grid-column: 1/2;
+}
+
 .content-body {
     background-color: rgb(219, 212, 194);
-    grid-column: 1/7;
+    grid-column: 2/3;
+}
+
+.right-margin {
+    background-color: rgb(219, 212, 194);
+    grid-column: 3/4;
 }
 
 .footer {
