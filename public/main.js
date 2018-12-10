@@ -9,5 +9,5 @@ var head = document.getElementsByTagName('head')[0];
 head.appendChild(script);
 
 function handler(){
-    $("#header").load("../components/layout.html");
+    $("#header").load("../components/header.html");
 }
