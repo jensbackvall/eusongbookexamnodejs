@@ -7,3 +7,5 @@ const vip_schema = new schema( {
     info_text: String,
     image: String
 });
+
+module.exports = mongoose.model('general_info', vip_schema);
