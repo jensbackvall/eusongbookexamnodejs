@@ -1,3 +1,7 @@
+body {
+    margin: 0;
+}
+
 .container {
     min-height: 130px;
     display: grid;
@@ -10,7 +14,7 @@
     grid-column: 1/7;
     display: grid;
     grid-template-columns: 1fr 4fr 1fr;
-    grid-gap: 0.1em;
+    /*grid-gap: 0.1em;*/
 }
 
 .logo {
@@ -117,7 +121,7 @@
     color: #daa520;
 }
 
-.left-margin {
+/*.left-margin {
     background-color: rgb(219, 212, 194);
     grid-column: 1/2;
 }
@@ -130,7 +134,7 @@
 .right-margin {
     background-color: rgb(219, 212, 194);
     grid-column: 3/4;
-}
+}*/
 
 .footer {
     background-color: rgb(207, 194, 163);
