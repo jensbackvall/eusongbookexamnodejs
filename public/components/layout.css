@@ -32,7 +32,7 @@
 }
 
 .menu-bar {
-    background-color: rgb(219, 212, 194);
+    background-color: rgb(230, 214, 179);
     grid-column: 1/7;
     display: grid;
     grid-template-columns: repeat(6, 1fr);
