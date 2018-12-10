@@ -11,7 +11,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/EUsongbook');
+//mongoose.connect('mongodb://localhost:27017/EUsongbook');
 
 app.get("/", (req, res) => res.sendFile(__dirname + "/public/index/index.html"))
 app.get("/six_categories", (req, res) => res.sendFile(__dirname + "/public/six_categories/six_categories.html"))
