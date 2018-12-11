@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const port = 3000;
 
-
+var isLoggedIn = 1;
 
 app.use(express.static('public'));
 
@@ -14,6 +14,7 @@ const mongoose = require('mongoose');
 //mongoose.connect('mongodb://localhost:27017/EUsongbook');
 
 app.get("/", (req, res) => res.sendFile(__dirname + "/public/index/index.html"))
+app.get("/admin", (req, res) => res.sendFile(__dirname + "/public/admin_log_in/admin_log_in.html"))
 app.get("/six_categories", (req, res) => res.sendFile(__dirname + "/public/six_categories/six_categories.html"))
 app.get("/nominations_per_country", (req, res) => res.sendFile(__dirname + "/public/nominations_per_country/nominations_per_country.html"))
 app.get("/press_releases", (req, res) => res.sendFile(__dirname + "/public/press_releases/press_releases.html"))
