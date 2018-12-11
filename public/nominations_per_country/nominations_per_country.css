@@ -1,3 +1,7 @@
+#content {
+    width: 100vw;
+}
+
 .nominations-per-country-container {
     background-color: rgb(219, 212, 194);
     min-height: 100vh;
@@ -17,6 +21,11 @@
     grid-column: 2/3;
 }
 
-.content-body img {
-    max-width: 100%;
+.right-margin {
+    background-color: rgb(219, 212, 194);
+    grid-column: 3/4;
+}
+
+ul {
+    list-style: none;
 }

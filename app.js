@@ -1,10 +1,15 @@
 const express = require('express');
 const app = express();
+const session = require('express-session');
+const cookieParser = require('cookie-parser');
+
 const port = 3000;
 
-var isLoggedIn = 1;
+var isLoggedIn = 1; // Just a placeholder variable when not using database
 
 app.use(express.static('public'));
+app.use(cookieParser());
+app.use(session({secret: "Ssssecret, prrrecccioussss!"}));
 
 var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -13,7 +18,14 @@ app.use(bodyParser.json());
 const mongoose = require('mongoose');
 //mongoose.connect('mongodb://localhost:27017/EUsongbook');
 
-app.get("/", (req, res) => res.sendFile(__dirname + "/public/index/index.html"))
+app.get("/", (req, res) => {
+    if (req.sessionID) {
+        var sid = req.sessionID;
+        console.log(sid);
+    }
+    res.sendFile(__dirname + "/public/index/index.html")
+})
+
 app.get("/admin", (req, res) => res.sendFile(__dirname + "/public/admin_log_in/admin_log_in.html"))
 app.get("/six_categories", (req, res) => res.sendFile(__dirname + "/public/six_categories/six_categories.html"))
 app.get("/nominations_per_country", (req, res) => res.sendFile(__dirname + "/public/nominations_per_country/nominations_per_country.html"))
@@ -26,6 +38,10 @@ app.get("/who_we_are", (req, res) => res.sendFile(__dirname + "/public/who_we_ar
 app.get("/statutes", (req, res) => res.sendFile(__dirname + "/public/statutes/statutes.html"))
 app.get("/contact_us", (req, res) => res.sendFile(__dirname + "/public/contact_us/contact_us.html"))
 app.get("/donate", (req, res) => res.sendFile(__dirname + "/public/donate/donate.html"))
+
+app.post("/signin", (req, res) => {
+
+});
 
 
 app.listen(port, () => console.log(`Listening on port ${port}!`))
