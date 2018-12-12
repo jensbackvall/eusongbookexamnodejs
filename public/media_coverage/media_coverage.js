@@ -19,7 +19,10 @@ $.ajax({
         const mediaLink = jsonList[i]['link'];
         //const htmlString = "<li><div id='" + mediaId + "'><p>" + publishDate + "</p><p><h3><a href='" + mediaLink + "'>" + mediaTitle + "</a></h3></p><p>" + mediaSource + "</p></div></li>";
         const htmlString = "<li><div id='" + mediaId + "'><p>" + publishDate + "<h3><a href='" + mediaLink + "'>" + mediaTitle + "</a></h3></p><p>" + mediaSource + "</p></div></li>";
-        $("#" + jsonList[i]['country'].toLowerCase()).append(htmlString);       
+        $("#" + jsonList[i]['country'].toLowerCase()).append(htmlString); 
+        
+        // check hvis admin er logget ind
+        // hvis ja, indsæt redigeringsknap samt redigeringsfelter for hvert element i dette li tag
     }
 });
 
