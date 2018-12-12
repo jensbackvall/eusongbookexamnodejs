@@ -14,7 +14,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 const mongoose = require('mongoose');
-//mongoose.connect('mongodb://localhost:27017/EUsongbook');
+mongoose.connect('mongodb://localhost:27017/EUsongbook');
+const Media = require('./models/media_coverage');
 
 app.get("/", (req, res) => res.sendFile(__dirname + "/public/index/index.html"));
 app.get("/admin", (req, res) => res.sendFile(__dirname + "/public/admin_log_in/admin_log_in.html"));
@@ -34,6 +35,14 @@ app.get("/who_we_are", (req, res) => res.sendFile(__dirname + "/public/who_we_ar
 app.get("/statutes", (req, res) => res.sendFile(__dirname + "/public/statutes/statutes.html"));
 app.get("/contact_us", (req, res) => res.sendFile(__dirname + "/public/contact_us/contact_us.html"));
 app.get("/donate", (req, res) => res.sendFile(__dirname + "/public/donate/donate.html"));
+
+app.get("/data", (req, res) => {
+    if (req.query.collection === "media_coverage"){
+        Media.find({}, (err, media_coverage) => {
+            res.json(media_coverage);
+        })
+    }
+});
 
 
 app.post("/signin", (req, res) => {
