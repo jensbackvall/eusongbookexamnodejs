@@ -6,6 +6,7 @@
     <title>Six Categories</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="../main.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <body>
     
@@ -14,10 +15,19 @@
     <div class="six-categories-container">
         <div class="left-margin"></div>
         <div class="content-body">
+
  
         </div>
         <div class="right-margin"></div>
     </div>
+
+    <script>
+        const adminIsHere = window.localStorage.getItem('user');
+        if (adminIsHere === 'admin') {
+            // Add forms relevant to this page
+            $(".content-body").append("<p>TESTINGITTESTYTESTY</p>");
+        }
+    </script>
 
 </body>
 </html>
