@@ -2,9 +2,10 @@ const mongoose = require('mongoose');
 const schema = mongoose.Schema;
 
 const media_coverage_schema = new schema( {
+    id: Number,
     type: String,
     country: String,
-    date: Date,
+    date: String,
     title: String,
     source: String,
     link: String
