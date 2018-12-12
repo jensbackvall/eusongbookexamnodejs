@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>EU Song Book ADMIN</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="../admin_log_in/admin_log_in.css" />
+    <script src="https://code.jquery.com/jquery-3.3.1.js" type="text/javascript"></script>
+    <script src="../main.js"></script>
+</head>
+<body>
+    
+
+    <div class="top"></div>
+    <div class="mid-left"></div>
+    <div class="login-field">
+        <h1>EU Song Book</h1>
+        <h2>ADMIN LOG IN</h2>
+        <form id="submitform">
+            <input type="text" class="username" name="userNameField" id="userNameField" placeholder="Jeppe">
+            <br><br>
+            <input type="password" class="password" name="passwordField" id="passwordField" placeholder="Beethoven">
+            <br><br>
+            <button type="submit" id="logInButton">
+                Login
+            </button>
+            <br>
+            <p id="response"></p>
+            <br>
+        </form>
+    </div>
+    <div class="mid-right"></div>
+    <div class="bottom"></div>
+
+
+    <script>
+    $("#logInButton" ).click((event) => {
+        console.log("Inside logInButton")
+        event.preventDefault();
+        const jsonFormObj = {"username":$("#userNameField").val(), "password":$("#passwordField").val()};
+        console.log(jsonFormObj); 
+        $.ajax({
+            url: '/signin',
+            type: 'POST',
+            data: jsonFormObj,
+            dataType: 'json'
+        }).done(function(data){
+            console.log(data);
+            if (data.response === 'Logged In') {
+                $('#response').text('You are logged in');
+                window.localStorage.setItem('user', 'admin');
+                window.location.replace("/");
+            } else {
+                $('#response').text('You are not logged in');
+            }
+        })
+    });
+    </script>
+
+
+</body>
+</html>
