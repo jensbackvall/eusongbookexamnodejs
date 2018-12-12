@@ -9,4 +9,4 @@ const vip_schema = new schema( {
     image: String
 });
 
-module.exports = mongoose.model('general_info', vip_schema);
+module.exports = mongoose.model('vip', vip_schema);
