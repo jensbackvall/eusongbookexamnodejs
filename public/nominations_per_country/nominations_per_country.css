@@ -1,0 +1,31 @@
+#content {
+    width: 100vw;
+}
+
+.nominations-per-country-container {
+    background-color: rgb(219, 212, 194);
+    min-height: 100vh;
+    width: 100vw;
+    display: grid;
+    grid-template-columns: 1fr 4fr 1fr;
+    grid-gap: 0.1em;
+}
+
+.left-margin {
+    background-color: rgb(219, 212, 194);
+    grid-column: 1/2;
+}
+
+.content-body {
+    background-color: rgb(219, 212, 194);
+    grid-column: 2/3;
+}
+
+.right-margin {
+    background-color: rgb(219, 212, 194);
+    grid-column: 3/4;
+}
+
+ul {
+    list-style: none;
+}
