@@ -7,14 +7,15 @@ const port = 3000;
 
 app.use(express.static('public'));
 app.use(cookieParser());
-app.use(session({secret: "Ssssecret-prrrecccioussss", cookie: { maxAge: 60000 }}));
+app.use(session({secret: "Ssssecret-prrrecccioussss", cookie: { maxAge: 60000 }, resave: true, saveUninitialized: true}));
 
 var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/EUsongbook');
+// Below we set the useNewUrlParser: true because the current version is deprecated
+mongoose.connect('mongodb://localhost:27017/EUsongbook', { useNewUrlParser: true });
 const Media = require('./models/media_coverage');
 
 app.get("/", (req, res) => res.sendFile(__dirname + "/public/index/index.html"));
@@ -44,6 +45,34 @@ app.get("/data", (req, res) => {
     }
 });
 
+app.post("/update", (req, res) => {
+    if (req.session.isLoggedIn = true) {
+        if (req.query.collection === "media_coverage"){
+            var query = { id: req.body.id };
+            Model.findOne(query, function (err, doc){
+                doc.date = req.body.date;
+                console.log(req.body.date);
+                doc.title = req.body.title;
+                doc.source = req.body.source;
+                doc.link = req.body.link;
+                doc.save();
+            });
+            //Media.update(query,{date: req.body.date, title: req.body.title, source: req.body.source, link: req.body.link}, options, callback) => {
+            //    res.json("Database has been succesfully updated!");
+            //});
+        }
+    } else {
+        res.json({"response": "Only ADMIN can update!"});
+    }
+});
+
+app.post("/delete", (req, res) => {
+    if (req.session.isLoggedIn = true) {
+
+    } else {
+        res.json({"response": "Only ADMIN can delete!"});
+    }
+});
 
 app.post("/signin", (req, res) => {
 

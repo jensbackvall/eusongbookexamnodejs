@@ -26,6 +26,11 @@
     grid-column: 3/4;
 }
 
+.dateFormat {
+    text-decoration: none;
+    font-weight: normal;
+}
+
 ul {
     list-style: none;
 }

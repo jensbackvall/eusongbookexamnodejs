@@ -8,4 +8,4 @@ const partner_schema = new schema( {
     information: String
 });
 
-module.exports = mongoose.model('local_partner', local_partners_schema);
+module.exports = mongoose.model('local_partner', partner_schema);
