@@ -21,8 +21,10 @@ function handler(){
     }
     
     const scriptString = ".." + pagePathName + pagePathName.substring(1, pagePathName.length - 1) + ".js";
-
-    $.getScript(scriptString,() => {});
+    if (pagePathName !== "/") {
+        $.getScript(scriptString,() => {});
+    }
+    
 
 }
 

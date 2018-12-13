@@ -58,17 +58,15 @@ app.post("/update", (req, res) => {
     console.log("theLink: ", theLink);
     if (req.session.isLoggedIn === true) {
         console.log("Inside /update: Admin is logged in");
-        if (req.query.collection === "media_coverage"){
-            var query = { id: req.body.id };
-            Model.findOne(query, function (err, doc){
-                doc.date = theDate;
-                console.log(req.body.date);
-                doc.title = req.body.title;
-                doc.source = req.body.source;
-                doc.link = req.body.link;
-                doc.save();
-            });
-        }
+        var query = { id: theId };
+        Media.findOne(query, function (err, doc){
+            console.log("Inside Media.findOne");
+            doc.date = theDate;
+            doc.title = theTitle;
+            doc.source = theSource;
+            doc.link = theLink;
+            doc.save();
+        });
     } else {
         res.json({"response": "Only ADMIN can update!"});
     }
