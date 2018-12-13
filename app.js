@@ -7,14 +7,15 @@ const port = 3000;
 
 app.use(express.static('public'));
 app.use(cookieParser());
-app.use(session({secret: "Ssssecret-prrrecccioussss", cookie: { maxAge: 60000 }}));
+app.use(session({secret: "Ssssecret-prrrecccioussss", cookie: { maxAge: 60000 }, resave: true, saveUninitialized: true}));
 
 var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/EUsongbook');
+// Below we set the useNewUrlParser: true because the current version is deprecated
+mongoose.connect('mongodb://localhost:27017/EUsongbook', { useNewUrlParser: true });
 const Media = require('./models/media_coverage');
 
 app.get("/", (req, res) => res.sendFile(__dirname + "/public/index/index.html"));
