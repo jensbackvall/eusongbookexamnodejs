@@ -29,7 +29,7 @@ $.ajax({
         // check if admin is logged in
         if (window.localStorage.getItem('user') === 'admin') {
             // if admin is logged in, append editing button and form for each element
-            $("#" + mediaId).append("<button type='submit' id='editButton" + mediaId + "'>Edit Item Above</button>");
+            $("#" + mediaId).append("<button type='submit' id='editButton" + mediaId + "'>Edit Item Above</button><p id='response_paragraph'></p>");
             $("#" + mediaId).append(`<br><br><form id="editform${mediaId}">
             <input type="text" class="publish_date" name="dateField${mediaId}" id="dateField${mediaId}" value="${publishDate}">
             <br><br>
@@ -58,8 +58,8 @@ $.ajax({
         $("#sendChangesButton" + mediaId).click((event) => {
             event.preventDefault();
             console.log("sendChangesButton " + mediaId + " pressed");
-        
-            const jsonFormObj = {"id":mediaId, "date":$(`#dateField${mediaId}`).val(), "title":$(`#titleField${mediaId}`).val(), "source":$(`#sourceField${mediaId}`).val(), "link":$(`#linkField${mediaId}`).val()};
+            const currentPath = "media_coverage";
+            const jsonFormObj = {"id":mediaId, "date":$(`#dateField${mediaId}`).val(), "title":$(`#titleField${mediaId}`).val(), "source":$(`#sourceField${mediaId}`).val(), "link":$(`#linkField${mediaId}`).val(), "path": currentPath};
             console.log("The json obj:" + jsonFormObj);
             $.ajax({
                 url: '/update',
@@ -68,25 +68,23 @@ $.ajax({
                 dataType: 'json'
             }).done(function(data){
                 console.log(data);
+                $('#response_paragraph').text(data.response);
             })
             $(`#editform${mediaId}`).css("display", "none");      
         });
         $("#deleteButton" + mediaId).click((event) => {
             event.preventDefault();
             console.log("deleteButton " + mediaId + " pressed");
-            // add ajax for deleting
+            const currentPath = "media_coverage";
+            const jsonFormObj = {"id":mediaId};
             $.ajax({
                 url: '/delete',
                 type: 'POST',
+                data: jsonFormObj,
+                dataType: 'json'
             }).done(function(data){
                 console.log(data);
-                if (data.response === 'Logged In') {
-                    $('#response').text('You are logged in');
-                    window.localStorage.setItem('user', 'admin');
-                    window.location.replace("/");
-                } else {
-                    $('#response').text('You are not logged in');
-                }
+                $('#response_paragraph').text(data.response);
             })
             $(`#editform${mediaId}`).css("display", "none");      
         });

@@ -2,6 +2,11 @@
     width: 100vw;
 }
 
+#response_paragraph {
+    color: red;
+    font-weight: bold;
+}
+
 .media-coverage-container {
     background-color: rgb(219, 212, 194);
     min-height: 100vh;

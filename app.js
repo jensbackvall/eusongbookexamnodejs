@@ -45,38 +45,51 @@ app.get("/data", (req, res) => {
     }
 });
 
-app.post("/update", (req, res) => {
-    const theId = req.body.id;
-    console.log("theId: ", theId);
-    const theDate = req.body.date;
-    console.log("theDate: ", theDate);
-    const theTitle = req.body.title;
-    console.log("TheTitle: ", theTitle);
-    const theSource = req.body.source;
-    console.log("theSource: ", theSource);
-    const theLink = req.body.link;
-    console.log("theLink: ", theLink);
+app.post("/create", (req,res) => {
     if (req.session.isLoggedIn === true) {
-        console.log("Inside /update: Admin is logged in");
-        var query = { id: theId };
-        Media.findOne(query, function (err, doc){
-            console.log("Inside Media.findOne");
-            doc.date = theDate;
-            doc.title = theTitle;
-            doc.source = theSource;
-            doc.link = theLink;
-            doc.save();
-        });
+
+        res.json({"response": "You have succesfully added the new information!"});
     } else {
-        res.json({"response": "Only ADMIN can update!"});
+        res.json({"response": "Only ADMIN can add new information! Please log in and try again!"});
+    }
+});
+
+app.post("/update", (req, res) => {
+    if (req.session.isLoggedIn === true) {
+        console.log(req.body.path);
+        if (req.body.path === "media_coverage") {
+            const theId = req.body.id;
+            const theDate = req.body.date;
+            const theTitle = req.body.title;
+            const theSource = req.body.source;
+            const theLink = req.body.link;
+            var query = { id: theId };
+            Media.findOne(query, function (err, doc){
+                doc.date = theDate;
+                doc.title = theTitle;
+                doc.source = theSource;
+                doc.link = theLink;
+                doc.save();
+            });
+        }
+        // TODO: Create updates for alle pages
+        res.json({"response": "You have succesfully updated the information!"});
+    } else {
+        res.json({"response": "Only ADMIN can update! Please log in and try again!"});
     }
 });
 
 app.post("/delete", (req, res) => {
     if (req.session.isLoggedIn = true) {
-
+        console.log(req.body.path);
+        if (req.body.path === "media_coverage") {
+            const theId = req.body.id;
+            var query = { id: theId };
+            Media.remove(query, (err) => {
+            });
+        }
     } else {
-        res.json({"response": "Only ADMIN can delete!"});
+        res.json({"response": "Only ADMIN can delete! Please log in and try again!"});
     }
 });
 
