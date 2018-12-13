@@ -58,7 +58,8 @@ $.ajax({
         $("#sendChangesButton" + mediaId).click((event) => {
             event.preventDefault();
             console.log("sendChangesButton " + mediaId + " pressed");
-            const jsonFormObj = {"id":mediaId, "date":$(`#dateField${mediaId}`).val(), "title":(`#titleField${mediaId}`).val(), "source":(`#sourceField${mediaId}`).val(), "link":(`#linkField${mediaId}`).val()};
+        
+            const jsonFormObj = {"id":mediaId, "date":$(`#dateField${mediaId}`).val(), "title":$(`#titleField${mediaId}`).val(), "source":$(`#sourceField${mediaId}`).val(), "link":$(`#linkField${mediaId}`).val()};
             console.log("The json obj:" + jsonFormObj);
             $.ajax({
                 url: '/update',

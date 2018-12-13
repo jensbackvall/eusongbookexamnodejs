@@ -46,20 +46,28 @@ app.get("/data", (req, res) => {
 });
 
 app.post("/update", (req, res) => {
-    if (req.session.isLoggedIn = true) {
+    const theId = req.body.id;
+    console.log("theId: ", theId);
+    const theDate = req.body.date;
+    console.log("theDate: ", theDate);
+    const theTitle = req.body.title;
+    console.log("TheTitle: ", theTitle);
+    const theSource = req.body.source;
+    console.log("theSource: ", theSource);
+    const theLink = req.body.link;
+    console.log("theLink: ", theLink);
+    if (req.session.isLoggedIn === true) {
+        console.log("Inside /update: Admin is logged in");
         if (req.query.collection === "media_coverage"){
             var query = { id: req.body.id };
             Model.findOne(query, function (err, doc){
-                doc.date = req.body.date;
+                doc.date = theDate;
                 console.log(req.body.date);
                 doc.title = req.body.title;
                 doc.source = req.body.source;
                 doc.link = req.body.link;
                 doc.save();
             });
-            //Media.update(query,{date: req.body.date, title: req.body.title, source: req.body.source, link: req.body.link}, options, callback) => {
-            //    res.json("Database has been succesfully updated!");
-            //});
         }
     } else {
         res.json({"response": "Only ADMIN can update!"});
@@ -86,6 +94,7 @@ app.post("/signin", (req, res) => {
 
         if (enteredUsername === "Jeppe" && enteredPassword === "Beethoven") {
             req.session.isLoggedIn = true;
+            console.log("isLoggedIn is now TRUE!!!");
             res.json({"response": "Logged In"});
         } else {
             res.json({"response": "username or password is INCORRECT"});
