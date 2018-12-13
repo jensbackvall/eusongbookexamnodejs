@@ -31,14 +31,14 @@ $.ajax({
         if (window.localStorage.getItem('user') === 'admin') {
         // hvis ja, indsæt redigeringsknap samt redigeringsfelter for hvert element i dette li tag
             $("#" + mediaId).append("<button type='submit' id='editButton" + mediaId + "'>Edit Item Above</button>");
-            $("#" + mediaId).append(`<form id="editform${mediaId}">
+            $("#" + mediaId).append(`<br><br><form id="editform${mediaId}">
             <input type="text" class="publish_date" name="dateField${mediaId}" id="dateField${mediaId}" placeholder="${publishDate}">
             <br><br>
-            <input type="text" class="media_title" name="titleField${mediaId}" id="titleField${mediaId}" placeholder="${mediaTitle}">
+            <textarea rows="5" cols="100" type="text" class="media_title" name="titleField${mediaId}" id="titleField${mediaId}" placeholder="${mediaTitle}"/>
             <br><br>
-            <input type="text" class="media_link" name="linkField${mediaId}" id="linkField${mediaId}" placeholder="${mediaLink}">
+            <textarea rows="5" cols="100" type="text" class="media_link" name="linkField${mediaId}" id="linkField${mediaId}" placeholder="${mediaLink}"/>
             <br><br>
-            <input type="text" class="media_source" name="sourceField${mediaId}" id="sourceField${mediaId}" placeholder="${mediaSource}">
+            <textarea rows="5" cols="100" type="text" class="media_source" name="sourceField${mediaId}" id="sourceField${mediaId}" placeholder="${mediaSource}"/>
             <br><br>
             <button type="submit" id="sendChangesButton${mediaId}">
                 Save Changes
