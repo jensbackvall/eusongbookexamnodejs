@@ -7,7 +7,7 @@ const port = 3000;
 
 app.use(express.static('public'));
 app.use(cookieParser());
-app.use(session({secret: "Ssssecret-prrrecccioussss", cookie: { maxAge: 60000 }, resave: true, saveUninitialized: true}));
+app.use(session({secret: "Ssssecret-prrrecccioussss", cookie: { maxAge: 3600000 }, resave: true, saveUninitialized: true}));
 
 var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -37,6 +37,14 @@ app.get("/statutes", (req, res) => res.sendFile(__dirname + "/public/statutes/st
 app.get("/contact_us", (req, res) => res.sendFile(__dirname + "/public/contact_us/contact_us.html"));
 app.get("/donate", (req, res) => res.sendFile(__dirname + "/public/donate/donate.html"));
 
+app.get("/loggedinquery", (req, res) => {
+    if (req.session.isLoggedIn === true) {
+        res.json({"loggedin": "yes"});
+    } else {
+        res.json({"loggedin": "no"});
+    }
+});
+
 app.get("/data", (req, res) => {
     if (req.query.collection === "media_coverage"){
         Media.find({}, (err, media_coverage) => {
@@ -47,7 +55,20 @@ app.get("/data", (req, res) => {
 
 app.post("/create", (req,res) => {
     if (req.session.isLoggedIn === true) {
-
+        console.log(req.body.path);
+        if (req.body.path === "media_coverage") {
+            const theId = req.body.id;
+            const theType = req.body.type;
+            const theCountry = req.body.country;
+            const theDate = req.body.date;
+            const theTitle = req.body.title;
+            const theSource = req.body.source;
+            const theLink = req.body.link;
+            theGeneralInfo.save(err =>{
+                if (err) throw err;
+                console.log("General Info saved to database");
+            });
+        }
         res.json({"response": "You have succesfully added the new information!"});
     } else {
         res.json({"response": "Only ADMIN can add new information! Please log in and try again!"});
@@ -110,6 +131,17 @@ app.post("/signin", (req, res) => {
         } else {
             res.json({"response": "username or password is INCORRECT"});
         }
+    }
+});
+
+app.post("/logout", (req, res) => {
+    const action = req.body.action;
+    console.log(action);
+
+    if (action === "logout") {
+        req.session.destroy();
+        console.log("isLoggedIn is now FALSE");
+        res.json({"response": "logout completed"});
     }
 });
 

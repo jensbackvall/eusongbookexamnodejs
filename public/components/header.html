@@ -57,6 +57,38 @@
                 </div>
             </div>
         </div>
+
+        <script>
+            $.ajax({
+                url: '/loggedinquery',
+                type: 'GET'
+            }).done(function(data) {
+                if (data.loggedin === 'yes') {
+                    $(".empty-corner").html(`<br><br><button type="submit"  id="logOutButton">Admin Log Out</button>`);
+                }
+
+                $(`#logOutButton`).click((event) => {
+                event.preventDefault();
+                const sonFormObj = {'action': 'logout'};
+                
+                $.ajax({
+                    url: '/logout',
+                    type: 'POST',
+                    data: sonFormObj,
+                    dataType: 'json'
+                }).done(function(data) {
+                    if (data) {
+                        window.localStorage.removeItem("user");
+                        $(".empty-corner").remove(`#logOutButton`);
+                        location.reload(true);
+                    }
+                });
+            });
+        });
+
+            
+        </script>
+
         <!-- <div class="left-margin"></div>
         <div class="content-body">
             

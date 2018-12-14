@@ -2,7 +2,16 @@
     width: 100vw;
 }
 
-#response_paragraph {
+#addMediaItemButton {
+    border-radius: 5px;
+}
+
+.addMediaButtonDiv {
+    display: flex;
+    justify-content: center;
+}
+
+.response_paragraph {
     color: red;
     font-weight: bold;
 }
