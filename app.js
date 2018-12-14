@@ -57,16 +57,18 @@ app.post("/create", (req,res) => {
     if (req.session.isLoggedIn === true) {
         console.log(req.body.path);
         if (req.body.path === "media_coverage") {
-            const theId = req.body.id;
-            const theType = req.body.type;
-            const theCountry = req.body.country;
-            const theDate = req.body.date;
-            const theTitle = req.body.title;
-            const theSource = req.body.source;
-            const theLink = req.body.link;
-            theGeneralInfo.save(err =>{
+            let newMediaCoverage = new Media ({
+                id : req.body.id,
+                type : req.body.type,
+                country : req.body.country,
+                date : req.body.date,
+                title : req.body.title,
+                source : req.body.source,
+                link : req.body.link
+            });     
+            newMediaCoverage.save(err =>{
                 if (err) throw err;
-                console.log("General Info saved to database");
+                console.log("New Media Item saved to database");
             });
         }
         res.json({"response": "You have succesfully added the new information!"});

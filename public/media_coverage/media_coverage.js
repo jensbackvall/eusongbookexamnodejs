@@ -12,6 +12,9 @@ $.ajax({
     "method": "GET"
 }).done(res => {
     const jsonList = res;
+    // TODO: Dette kan give problemer med dobbelte id. Tag hellere det højest id i jsonList og increment med 1
+    const nextIdToAdd = jsonList.length + 1;
+    console.log("Length og jsonlist: ", jsonList.length);
     var currentCountry = "";
     for (let i = 0; i < jsonList.length; i++) { 
         const thisCountry = jsonList[i]['country'].toLowerCase();
@@ -107,19 +110,56 @@ $.ajax({
         $(`.press-releases`).prepend(`<br><div class="addMediaButtonDiv"><br><br><button type="submit"  id="addMediaItemButton">Add New Media Item</button></div>`);
 
         $(`<div class="new-media-div"><br><br><form id="addNewMediaItemForm">
-        <input type="text" class="newIdField" name="newIdField" id="newIdField" placeholder="id">
+        Type:
+        <select name="newTypeField" id="newTypeField">
+            <option value="Written">Written</option>
+            <option value="Audio">Audio</option>
+            <option value="Video">Video</option>
+        </select>
+        &nbsp&nbsp
+        Country:
+        <select name="newCountryField" id="newCountryField">
+            <option value="AUSTRIA">Austria</option>
+            <option value="BELGIUM">Belgium</option>
+            <option value="BULGARIA">Bulgaria</option>
+            <option value="CROATIA">Croatia</option>
+            <option value="CYPRUS">Cyprus</option>
+            <option value="CZECH REPUBLIQUE">Czech Republique</option>
+            <option value="DENMARK">Denmark</option>
+            <option value="ESTONIA">Estonia</option>
+            <option value="FINLAND">Finland</option>
+            <option value="FRANCE">France</option>
+            <option value="GERMANY">Germany</option>
+            <option value="GREECE">Greece</option>
+            <option value="HUNGARY">Hungary</option>
+            <option value="IRELAND">Ireland</option>
+            <option value="ITALY">Italy</option>
+            <option value="LATVIA">Latvia</option>
+            <option value="LITHUANIA">Lithuania</option>
+            <option value="LUXEMBOURG">Luxembourg</option>
+            <option value="MALTA">Malta</option>
+            <option value="NETHERLANDS">Netherlands</option>
+            <option value="POLAND">Poland</option>
+            <option value="PORTUGAL">Portugal</option>
+            <option value="ROMANIA">Romania</option>
+            <option value="SLOVAKIA">Slovakia</option>
+            <option value="SLOVENIA">Slovenia</option>
+            <option value="SPAIN">Spain</option>
+            <option value="SWEDEN">Sweden</option>
+            <option value="UNITED KINGDOM">United Kingdom</option>
+        </select>
         <br><br>
-        <input type="text" class="newTypeField" name="newTypeField" id="newTypeField" placeholder="Written, Audio or Video?">
+        Date:
+        <textarea rows="2" cols="100" class="newDateField" name="newDateField" id="newDateField" placeholder="Date format must be DD.MM.YY"></textarea>
         <br><br>
-        <input type="text" class="newCountryField" name="newCountryField" id="newCountryField" placeholder="Country">
+        Title:
+        <textarea rows="2" cols="100" class="newTitleField" name="newTitleField" id="newTitleField" placeholder="Title"></textarea>
         <br><br>
-        <input type="text" class="newDateField" name="newDateField" id="newDateField" placeholder="Date">
+        Source:
+        <textarea rows="2" cols="100" class="newSourceField" name="newSourceField" id="newSourceField" placeholder="Source"></textarea>
         <br><br>
-        <input type="text" class="newTitleField" name="newTitleField" id="newTitleField" placeholder="Title">
-        <br><br>
-        <input type="text" class="newSourceField" name="newSourceField" id="newSourceField" placeholder="Source">
-        <br><br>
-        <input type="text" class="newLinkField" name="newLinkField" id="newLinkField" placeholder="Link">
+        Link:
+        <textarea rows="2" cols="100" class="newLinkField" name="newLinkField" id="newLinkField" placeholder="Link"></textarea>
         <br><br>
         <br><br>
         <button type="submit" id="saveNewMediaItemButton">
@@ -139,7 +179,7 @@ $.ajax({
         event.preventDefault();
         console.log("saveNewMediaItemButton pressed");
         const currentPath = "media_coverage";
-        const jsonFormObj = {"id":$(`#newIdField`).val(), "type":$(`#newTypeField`).val(), "country":$(`#newCountryField`).val(), "date":$(`#newDateField`).val(), "title":$(`#newTitleField`).val(), "source":$(`#newSourceField`).val(), "link":$(`#newLinkField`).val(), "path": currentPath};
+        const jsonFormObj = {"id":nextIdToAdd, "type":$(`#newTypeField`).val(), "country":$(`#newCountryField`).val(), "date":$(`#newDateField`).val(), "title":$(`#newTitleField`).val(), "source":$(`#newSourceField`).val(), "link":$(`#newLinkField`).val(), "path": currentPath};
         console.log("The json obj:" + jsonFormObj);
         $.ajax({
             url: '/create',
