@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
+const bcrypt = require('bcrypt');
 
 const port = 3000;
 
@@ -17,15 +18,11 @@ const mongoose = require('mongoose');
 // Below we set the useNewUrlParser: true because the current version is deprecated
 mongoose.connect('mongodb://localhost:27017/EUsongbook', { useNewUrlParser: true });
 const Media = require('./models/media_coverage');
+const User = require('./models/User');
 
 app.get("/", (req, res) => res.sendFile(__dirname + "/public/index/index.html"));
 app.get("/admin", (req, res) => res.sendFile(__dirname + "/public/admin_log_in/admin_log_in.html"));
-
-app.get("/six_categories", (req, res) => 
-    res.sendFile(__dirname + "/public/six_categories/six_categories.html")
-
-);
-
+app.get("/six_categories", (req, res) => res.sendFile(__dirname + "/public/six_categories/six_categories.html"));
 app.get("/nominations_per_country", (req, res) => res.sendFile(__dirname + "/public/nominations_per_country/nominations_per_country.html"));
 app.get("/press_releases", (req, res) => res.sendFile(__dirname + "/public/press_releases/press_releases.html"));
 app.get("/media_coverage", (req, res) => res.sendFile(__dirname + "/public/media_coverage/media_coverage.html"));
@@ -55,7 +52,6 @@ app.get("/data", (req, res) => {
 
 app.post("/create", (req,res) => {
     if (req.session.isLoggedIn === true) {
-        console.log(req.body.path);
         if (req.body.path === "media_coverage") {
             let newMediaCoverage = new Media ({
                 id : req.body.id,
@@ -79,7 +75,6 @@ app.post("/create", (req,res) => {
 
 app.post("/update", (req, res) => {
     if (req.session.isLoggedIn === true) {
-        console.log(req.body.path);
         if (req.body.path === "media_coverage") {
             const theId = req.body.id;
             const theDate = req.body.date;
@@ -95,7 +90,6 @@ app.post("/update", (req, res) => {
                 doc.save();
             });
         }
-        // TODO: Create updates for alle pages
         res.json({"response": "You have succesfully updated the information!"});
     } else {
         res.json({"response": "Only ADMIN can update! Please log in and try again!"});
@@ -104,7 +98,6 @@ app.post("/update", (req, res) => {
 
 app.post("/delete", (req, res) => {
     if (req.session.isLoggedIn = true) {
-        console.log(req.body.path);
         if (req.body.path === "media_coverage") {
             const theId = req.body.id;
             var query = { id: theId };
@@ -122,27 +115,27 @@ app.post("/signin", (req, res) => {
     const enteredPassword = req.body.password;
 
     if (enteredUsername && enteredPassword) {
-
-        console.log('entered username:' + enteredUsername + " entered password -> " + enteredPassword) 
-        // TODO: find user credentials in mongo for comparison and validation
-
-        if (enteredUsername === "Jeppe" && enteredPassword === "Beethoven") {
-            req.session.isLoggedIn = true;
-            console.log("isLoggedIn is now TRUE!!!");
-            res.json({"response": "Logged In"});
-        } else {
-            res.json({"response": "username or password is INCORRECT"});
-        }
+        User.findOne({name: "Jeppe"}, function (err, user){
+            const thePasswordHash = user.password;
+            bcrypt.compare(enteredPassword, thePasswordHash).then(response => {
+                if(response) {
+                    req.session.isLoggedIn = true;
+                    res.json({"response": "Logged In"});
+                } else {
+                    res.json({"response":"Not loggedin"});
+                }
+            });
+        });
+    } else {
+        res.json({"response": "username or password is INCORRECT"});
     }
 });
 
 app.post("/logout", (req, res) => {
     const action = req.body.action;
-    console.log(action);
 
     if (action === "logout") {
         req.session.destroy();
-        console.log("isLoggedIn is now FALSE");
         res.json({"response": "logout completed"});
     }
 });
