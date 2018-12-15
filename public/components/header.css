@@ -3,6 +3,10 @@ body {
     margin: 0;
 }
 
+#logo {
+    max-height: 80px;
+}
+
 .container {
     min-height: 130px;
     display: grid;
