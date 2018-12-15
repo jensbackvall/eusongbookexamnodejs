@@ -71,38 +71,34 @@ $.ajax({
             console.log("sendChangesButton " + mediaId + " pressed");
             const currentPath = "media_coverage";
             const jsonFormObj = {"id":mediaId, "date":$(`#dateField${mediaId}`).val(), "title":$(`#titleField${mediaId}`).val(), "source":$(`#sourceField${mediaId}`).val(), "link":$(`#linkField${mediaId}`).val(), "path": currentPath};
-            console.log("The json obj:" + jsonFormObj);
             $.ajax({
                 url: '/update',
                 type: 'POST',
                 data: jsonFormObj,
                 dataType: 'json'
             }).done(function(data){
-                console.log(data);
                 $(`#response_paragraph${mediaId}`).css("display", "");
                 $(`#response_paragraph${mediaId}`).text(data.response);
                 $(`#editform${mediaId}`).css("display", "none");
-                if (data.response !== "Only ADMIN can update! Please log in and try again!") {
-                    $(location.reload(true));
-                }
+                $(location.reload(true));
             })          
         });
         $("#deleteButton" + mediaId).click((event) => {
             event.preventDefault();
             console.log("deleteButton " + mediaId + " pressed");
             const currentPath = "media_coverage";
-            const jsonFormObj = {"id":mediaId};
+            const jsonFormObj = {"id":mediaId, "path": currentPath};
             $.ajax({
                 url: '/delete',
                 type: 'POST',
                 data: jsonFormObj,
                 dataType: 'json'
             }).done(function(data){
-                console.log(data);
                 $(`#response_paragraph${mediaId}`).css("display", "");
                 $(`#response_paragraph${mediaId}`).text(data.response);
-            })
-            $(`#editform${mediaId}`).css("display", "none");      
+                $(`#editform${mediaId}`).css("display", "none");
+                $(location.reload(true));
+            })      
         });
     }
 
@@ -188,12 +184,8 @@ $.ajax({
             dataType: 'json'
         }).done(function(data){
             console.log(data);
-            $(`#response_paragraph${mediaId}`).css("display", "");
-            $(`#response_paragraph${mediaId}`).text(data.response);
             $(`#addNewMediaItemForm`).css("display", "none");
-            if (data.response !== "Only ADMIN can create! Please log in and try again!") {
-                $(location.reload(true));
-            }
+            $(location.reload(true));
         })          
     });
 });

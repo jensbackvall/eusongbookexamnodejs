@@ -97,13 +97,17 @@ app.post("/update", (req, res) => {
 });
 
 app.post("/delete", (req, res) => {
+    console.log("Inside /delete");
     if (req.session.isLoggedIn = true) {
+        console.log(req.body.path);
         if (req.body.path === "media_coverage") {
             const theId = req.body.id;
+            console.log(theId);
             var query = { id: theId };
-            Media.remove(query, (err) => {
+            Media.deleteOne(query, (err) => {
             });
         }
+        res.json({"response": "You have succesfully deleted the item!"});
     } else {
         res.json({"response": "Only ADMIN can delete! Please log in and try again!"});
     }
