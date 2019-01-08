@@ -107,7 +107,7 @@ app.post("/delete", (req, res) => {
             Media.deleteOne(query, (err) => {
             });
         }
-        res.json({"response": "You have succesfully deleted the item!"});
+        res.json({"response": "You have succesfully deleted the information!"});
     } else {
         res.json({"response": "Only ADMIN can delete! Please log in and try again!"});
     }
@@ -143,5 +143,9 @@ app.post("/logout", (req, res) => {
         res.json({"response": "logout completed"});
     }
 });
+
+app.get("/sayhello", (req, res) => {
+    res.send("hello to " +  req.query.name);
+}); 
 
 app.listen(port, () => console.log(`Listening on port ${port}!`))

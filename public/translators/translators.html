@@ -11,7 +11,7 @@
 <body>
     
     <div id = "header"></div>
-
+    <h1></h1>
     <div class="translators-container">
         <div class="left-margin"></div>
         <div class="content-body">
@@ -19,6 +19,15 @@
         </div>
         <div class="right-margin"></div>
     </div>
+
+    <script>
+        $.ajax( {
+            url:"sayhello",
+            method: "get"
+        }).done(res => {
+            $("h1").html(res);
+        });
+    </script>
 
 </body>
 </html>

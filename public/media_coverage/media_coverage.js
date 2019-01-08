@@ -12,7 +12,7 @@ $.ajax({
     "method": "GET"
 }).done(res => {
     const jsonList = res;
-    // TODO: Dette kan give problemer med dobbelte id. Tag hellere det højest id i jsonList og increment med 1
+    // TODO: Nedenstående kan give problemer med dobbelte id. Tag hellere det højest id i jsonList og increment med 1
     const nextIdToAdd = jsonList.length + 1;
     console.log("Length og jsonlist: ", jsonList.length);
     var currentCountry = "";
