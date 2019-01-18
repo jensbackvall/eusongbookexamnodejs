@@ -1,4 +1,4 @@
-var General = require('./models/general_info');
+var General = require('./models/media_coverage');
 const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost:27017/EUsongbook');
 
