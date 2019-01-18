@@ -164,6 +164,7 @@ $.ajax({
         <br>
         </form></div>`).insertAfter(".addMediaButtonDiv");
         $(`#addNewMediaItemForm`).css("display", "none");
+        
     }
 
     $("#addMediaItemButton").click((event) => {

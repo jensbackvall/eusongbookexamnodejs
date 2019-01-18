@@ -19,6 +19,7 @@ const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost:27017/EUsongbook', { useNewUrlParser: true });
 const Media = require('./models/media_coverage');
 const User = require('./models/User');
+const General = require('./models/general_info');
 
 app.get("/", (req, res) => res.sendFile(__dirname + "/public/index/index.html"));
 app.get("/admin", (req, res) => res.sendFile(__dirname + "/public/admin_log_in/admin_log_in.html"));
@@ -46,7 +47,11 @@ app.get("/data", (req, res) => {
     if (req.query.collection === "media_coverage"){
         Media.find({}, (err, media_coverage) => {
             res.json(media_coverage);
-        })
+        });
+    } else if (req.query.collection === "general_info"){
+        General.find({}, (err, general_info) => {
+            res.json(general_info);
+        });
     }
 });
 
@@ -87,6 +92,12 @@ app.post("/update", (req, res) => {
                 doc.title = theTitle;
                 doc.source = theSource;
                 doc.link = theLink;
+                doc.save();
+            });
+        } else if (req.body.path === "mission_statement") {
+            const theMissionStatement = req.body.mission_statement;
+            Media.findOne({}, (err, doc) => {
+                doc.mission_statement = theMissionStatement;
                 doc.save();
             });
         }
