@@ -18,7 +18,7 @@ const mongoose = require('mongoose');
 // Below we set the useNewUrlParser: true because the current version is deprecated
 mongoose.connect('mongodb://localhost:27017/EUsongbook', { useNewUrlParser: true });
 const Media = require('./models/media_coverage');
-const User = require('./models/User');
+const User = require('./models/user');
 const General = require('./models/general_info');
 
 app.get("/", (req, res) => res.sendFile(__dirname + "/public/index/index.html"));
