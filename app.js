@@ -1,6 +1,7 @@
 require('dotenv').config();
 
-const express = require('express');
+const express = require('express'),
+SessionStore = require('session-mongoose')(express);
 const app = express();
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
@@ -10,7 +11,18 @@ const port = 3000;
 
 app.use(express.static('public'));
 app.use(cookieParser());
-app.use(session({secret: "Ssssecret-prrrecccioussss", cookie: { maxAge: 3600000 }, resave: true, saveUninitialized: true}));
+//app.use(session({secret: "Ssssecret-prrrecccioussss", cookie: { maxAge: 3600000 }, resave: true, saveUninitialized: true}));
+
+app.use(
+    express.session({
+      store: new SessionStore({
+      url: 'mongodb://localhost/session',
+      interval: 3600000
+    }),
+    cookie: { maxAge: 3600000 },
+    secret: 'Ssssecret-prrrecccioussss',
+    resave: true, saveUninitialized: true
+  }));
 
 var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
