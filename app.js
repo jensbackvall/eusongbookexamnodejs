@@ -1,7 +1,7 @@
 require('dotenv').config();
 
-const express = require('express'),
-SessionStore = require('session-mongoose')(express);
+const express = require('express');
+const SessionStore = require('session-mongoose')(express);
 const app = express();
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
