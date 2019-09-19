@@ -16,7 +16,12 @@ app.use(bodyParser.json());
 
 const mongoose = require('mongoose');
 // Below we set the useNewUrlParser: true because the current version is deprecated
-mongoose.connect('mongodb://localhost:27017/EUsongbook', { useNewUrlParser: true });
+//mongoose.connect('mongodb://localhost:27017/EUsongbook', { useNewUrlParser: true });
+mongoose.connect(process.env.MONGODB_URI);
+    //|| 'mongodb://localhostlocalhost:27017/EUsongbook');
+
+
+
 const Media = require('./models/media_coverage');
 const User = require('./models/user');
 const General = require('./models/general_info');
