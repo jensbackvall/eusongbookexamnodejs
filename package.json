@@ -4,6 +4,7 @@
   "description": "EU song book project for node.js exam 2018",
   "main": "app.js",
   "scripts": {
+    "start": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
