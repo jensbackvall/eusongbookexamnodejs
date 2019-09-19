@@ -177,4 +177,4 @@ app.get("/sayhello", (req, res) => {
     res.send("hello to " +  req.query.name);
 }); 
 
-app.listen(port, () => console.log(`Listening on port ${port}!`))
+app.listen(process.env.PORT || port, () => console.log(`Listening on port ${port}!`))
