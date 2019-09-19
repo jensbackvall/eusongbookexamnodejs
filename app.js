@@ -17,8 +17,7 @@ app.use(bodyParser.json());
 const mongoose = require('mongoose');
 // Below we set the useNewUrlParser: true because the current version is deprecated
 //mongoose.connect('mongodb://localhost:27017/EUsongbook', { useNewUrlParser: true });
-mongoose.connect(process.env.MONGODB_URI);
-    //|| 'mongodb://localhostlocalhost:27017/EUsongbook');
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://<dbuser>:<dbpassword>@ds225010.mlab.com:25010/heroku_f6l9mf35');
 
 
 
